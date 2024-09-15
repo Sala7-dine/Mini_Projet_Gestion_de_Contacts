@@ -1,6 +1,6 @@
 # 📒 Gestion des Contacts
 
-Ce projet est une application de gestion des contacts en langage C. Il permet d'ajouter, afficher, modifier, supprimer, et rechercher des contacts.
+Ce mini-projet est une application de gestion des contacts en langage C. Il permet d'ajouter, afficher, modifier, supprimer, et rechercher des contacts. Ce mini-projet a été réalisé dans le cadre de la période de SAS à Youcode Nador 2023/2024, sous la supervision du formateur Hamza Bouchikhi.
 
 ## 🌟 Fonctionnalités
 - ➕ **Ajouter un contact** : Enregistre un nouveau contact avec un nom, un numéro de téléphone et une adresse e-mail.
