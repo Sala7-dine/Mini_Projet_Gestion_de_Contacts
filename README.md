@@ -47,7 +47,7 @@ compile.bat
 🏁 Une fois la compilation réussie, exécutez le fichier généré Gestion.exe pour démarrer l'application.
 
 ### 📜 Script de compilation pour macOS (compile_mac.sh) 
-
+```cmd
 #!/bin/bash
 
 echo "Checking for existing executable..."
@@ -65,7 +65,7 @@ else
     echo "Compilation successful!"
     echo "Executable created: Gestion"
 fi
-
+```
 Rendez le script exécutable et exécutez-le :
 chmod +x compile_mac.sh
 ./compile_mac.sh
