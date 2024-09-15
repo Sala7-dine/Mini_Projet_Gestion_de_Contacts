@@ -12,7 +12,7 @@ int main(){
 
     conatcts = calloc(Taille , sizeof(Contacts));
 
-    while(choix != 5){
+    while(choix != 7){
 
         choixValid = Choix(&choix);
 
@@ -39,6 +39,15 @@ int main(){
                         printf("\n\t --- Le Contact a ete Modifier avec Succes ----\n");
                     }else{
                         printf("\n\t --- Erreur de Modification ----\n");
+                    }
+                    break;
+            case 4:
+                    int valid_suppression = Supprimer_un_contact(conatcts , &Taille);
+                    if(valid_suppression){
+                        printf("\n\t --- Le Contact a ete Supprimer avec Succes ----\n");
+                        if(Taille > 0 ) Taille--;
+                    }else{
+                        printf("\n\t --- Erreur de Suppression ----\n");
                     }
                     break;
             default:

@@ -19,6 +19,7 @@ typedef struct{
 void Afficher_tout_les_contact(Contacts *contacts, int *Taille);
 int Ajouter_un_contact(Contacts *contacts, int *Taille);
 int Modifier_un_contact(Contacts *contacts, int *Taille);
+int Supprimer_un_contact(Contacts *contacts, int *Taille);
 int Rechechr_un_contact(Contacts *contacts, int *Taille);
 int Tri_des_contact(Contacts *contacts, int *Taille);
 int Choix(int *choix);
