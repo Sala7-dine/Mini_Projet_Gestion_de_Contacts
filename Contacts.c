@@ -18,7 +18,7 @@ int Choix(int *choix){
                "|\t[6] Tri les contact                  |\n\t"
                "|\t[\033[33m7\033[0m] \033[33mQuitter\033[0m                          |\n"
                "\t==============================================\n\t"
-               "\n\tTapez votre choix [1-8] : ");
+               "\n\tTapez votre choix [1-7] : ");
                ch = scanf("%d", choix);
                while(getchar() != '\n');
                if(ch) return ch;
@@ -27,7 +27,8 @@ int Choix(int *choix){
 
 void Afficher_un_contact(Contacts *contacts, int i){
 
-    printf("\n\t ------ Contacts %d ------\n\n" , contacts[i].id);
+    printf("\n\t ------ Contacts %d ------\n\n" , i+1);
+    printf("\t -- iD        : %d\n" , contacts[i].id);
     printf("\t -- Nom       : %s\n" , contacts[i].Nom);
     printf("\t -- Telephone : +212 %d\n" , contacts[i].Tele);
     printf("\t -- Email     : %s\n" , contacts[i].Email);
@@ -37,14 +38,15 @@ void Afficher_un_contact(Contacts *contacts, int i){
 void Afficher_tout_les_contact(Contacts *contacts, int *Taille){
 
     if(contacts == NULL || *Taille  == 0){
-        printf("\n\t ---- La Liste est vide ----\n");
+        printf("\n\t \x1b[31m---- La Liste est vide ----\x1b[0m\n");
         return; 
     }
 
     int i;
 
     for(i=0 ; i < *Taille ; i++){
-        printf("\n\t ------ Contacts %d ------\n\n" , contacts[i].id);
+        printf("\n\t \x1b[32m------ Contacts %d ------\x1b[0m\n\n" , i+1);
+        printf("\t -- iD        : %d\n" , contacts[i].id);
         printf("\t -- Nom       : %s\n" , contacts[i].Nom);
         printf("\t -- Telephone : +212 %d\n" , contacts[i].Tele);
         printf("\t -- Email     : %s\n" , contacts[i].Email);
@@ -57,13 +59,13 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
     contacts = realloc(contacts , (*Taille + 1)*sizeof(Contacts));
 
     if(contacts == NULL){
-        printf("\n\t --- Erreur D'allocation ----\n");
+        printf("\n\t \x1b[31m--- Erreur D'allocation ----\x1b[0m\n");
         return 0;
     }
 
     Contacts contact;
 
-    printf("\n\t ---- Ajouter un contatc ----\n");
+    printf("\n\t \x1b[32m---- Ajouter un contatc ----\x1b[0m \n");
 
     // Validation de id -------
     int id_count = 0; 
@@ -78,7 +80,7 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
             return 0;
         }else{
             id_count++;
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
 
@@ -105,7 +107,7 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
             return 0;
         }else{
             nom_count++;
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
 
@@ -129,7 +131,7 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
             break;
         }else{
             tel_count++;
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
 
@@ -161,7 +163,7 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
             return 0;
         }else{
             email_count++;
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
     
@@ -198,17 +200,17 @@ int Modifier_un_contact(Contacts *contacts, int *Taille){
         }else if( choix_count > 2 ) {
             return 0;
         }else if (exist == false) {
-            printf("\n\t --- Contact avec ce nom n'est pas exist ---- \n");
+            printf("\n\t \x1b[33m--- Contact avec ce nom n'est pas exist ----\x1b[0m \n");
             choix_count++;
         }else{
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
             choix_count++;
         }
     }
 
     Contacts contact;
 
-    printf("\n\t ---- Modifier un contatc ----\n");
+    printf("\n\t \x1b[32m---- Modifier un contatc ----\x1b[0m\n");
 
     // Validation de id -------
     contact.id = contacts[pos].id;
@@ -236,7 +238,7 @@ int Modifier_un_contact(Contacts *contacts, int *Taille){
             return 0;
         }else{
             nom_count++;
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
 
@@ -260,7 +262,7 @@ int Modifier_un_contact(Contacts *contacts, int *Taille){
             break;
         }else{
             tel_count++;
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
 
@@ -292,7 +294,7 @@ int Modifier_un_contact(Contacts *contacts, int *Taille){
             return 0;
         }else{
             email_count++;
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
     
@@ -329,10 +331,10 @@ int Supprimer_un_contact(Contacts *contacts, int *Taille){
         }else if( choix_count > 2 ) {
             return 0;
         }else if (exist == false) {
-            printf("\n\t --- Contact avec ce nom n'est pas exist ---- \n");
+            printf("\n\t \x1b[33m--- Contact avec ce nom n'est pas exist ----\x1b[0m \n");
             choix_count++;
         }else{
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
             choix_count++;
         }
     }
@@ -377,9 +379,9 @@ int Rechechr_un_contact(Contacts *contacts, int *Taille){
             return 0;
         }else if (exist == false) {
             choix_count++;
-            printf("\n\t --- Contact avec ce nom n'est pas exist ---- \n");
+            printf("\n\t \x1b[33m--- Contact avec ce nom n'est pas exist ----\x1b[0m \n");
         }else{
-            printf("\n\t -- Invalid Choix -- \n");
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
             choix_count++;
         }
     }   
