@@ -33,6 +33,14 @@ int main(){
             case 2:
                     Afficher_tout_les_contact(conatcts , &Taille);
                     break;
+            case 3:
+                    int valid_modifie = Modifier_un_contact(conatcts , &Taille);
+                    if(valid_modifie){
+                        printf("\n\t --- Le Contact a ete Modifier avec Succes ----\n");
+                    }else{
+                        printf("\n\t --- Erreur de Modification ----\n");
+                    }
+                    break;
             default:
                 break;
             }
