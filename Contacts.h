@@ -15,7 +15,6 @@ typedef struct{
 
 }Contacts;
 
-
 void Afficher_tout_les_contact(Contacts *contacts, int *Taille);
 int Ajouter_un_contact(Contacts *contacts, int *Taille);
 int Modifier_un_contact(Contacts *contacts, int *Taille);

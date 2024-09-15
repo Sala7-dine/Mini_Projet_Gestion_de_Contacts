@@ -50,6 +50,12 @@ int main(){
                         printf("\n\t --- Erreur de Suppression ----\n");
                     }
                     break;
+            case 5:
+                    int valid_cherche = Rechechr_un_contact(conatcts , &Taille);
+                    if(valid_cherche != 1){
+                        printf("\n\t --- Erreur de Recherche ----\n");
+                    }
+                    break;
             default:
                 break;
             }

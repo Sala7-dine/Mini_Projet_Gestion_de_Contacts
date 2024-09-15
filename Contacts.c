@@ -25,6 +25,15 @@ int Choix(int *choix){
                else return 0;
 }
 
+void Afficher_un_contact(Contacts *contacts, int i){
+
+    printf("\n\t ------ Contacts %d ------\n\n" , contacts[i].id);
+    printf("\t -- Nom       : %s\n" , contacts[i].Nom);
+    printf("\t -- Telephone : +212 %d\n" , contacts[i].Tele);
+    printf("\t -- Email     : %s\n" , contacts[i].Email);
+    
+}
+
 void Afficher_tout_les_contact(Contacts *contacts, int *Taille){
 
     if(contacts == NULL || *Taille  == 0){
@@ -45,7 +54,6 @@ void Afficher_tout_les_contact(Contacts *contacts, int *Taille){
 int Ajouter_un_contact(Contacts *contacts, int *Taille){
 
     int i;
-    printf("\n --- Taille = %d ----\n" , *Taille);
     contacts = realloc(contacts , (*Taille + 1)*sizeof(Contacts));
 
     if(contacts == NULL){
@@ -187,11 +195,11 @@ int Modifier_un_contact(Contacts *contacts, int *Taille){
 
         if(valide_input && exist){
             break;
+        }else if( choix_count > 2 ) {
+            return 0;
         }else if (exist == false) {
             printf("\n\t --- Contact avec ce nom n'est pas exist ---- \n");
             choix_count++;
-        }else if( choix_count > 2 ) {
-            return 0;
         }else{
             printf("\n\t -- Invalid Choix -- \n");
             choix_count++;
@@ -318,11 +326,11 @@ int Supprimer_un_contact(Contacts *contacts, int *Taille){
 
         if(valide_input && exist){
             break;
+        }else if( choix_count > 2 ) {
+            return 0;
         }else if (exist == false) {
             printf("\n\t --- Contact avec ce nom n'est pas exist ---- \n");
             choix_count++;
-        }else if( choix_count > 2 ) {
-            return 0;
         }else{
             printf("\n\t -- Invalid Choix -- \n");
             choix_count++;
@@ -341,3 +349,43 @@ int Supprimer_un_contact(Contacts *contacts, int *Taille){
     return 1;
 
 }
+
+int Rechechr_un_contact(Contacts *contacts, int *Taille){
+
+    char nom[MAX_CHARACTER1];
+    int choix_count = 0 , pos , i;
+
+    // verifier le nom existe ou non
+    while(1){
+        bool exist = false;
+        printf("\n\t -- Saisir Le Nom de Contact qui voules-vous chercher : ");
+        int valide_input = scanf(" %[^\n]s" , nom);
+        while(getchar() != '\n');
+
+        for(int i=0;i<*Taille;i++){
+            int value = strcmp(contacts[i].Nom , nom);
+            if(value == 0){
+                exist = true;
+                pos = i;
+                break;
+            }  
+        }
+
+        if(valide_input && exist){
+            break;
+        }else if( choix_count > 2 ) {
+            return 0;
+        }else if (exist == false) {
+            choix_count++;
+            printf("\n\t --- Contact avec ce nom n'est pas exist ---- \n");
+        }else{
+            printf("\n\t -- Invalid Choix -- \n");
+            choix_count++;
+        }
+    }   
+
+    Afficher_un_contact(contacts , pos);
+
+    return 1;
+}
+
