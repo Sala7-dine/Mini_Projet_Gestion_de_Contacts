@@ -8,7 +8,7 @@
 
 typedef struct{
 
-    int id;
+    char id[MAX_CHARACTER2];
     char Nom[MAX_CHARACTER1];
     int Tele;
     char Email[MAX_CHARACTER2];

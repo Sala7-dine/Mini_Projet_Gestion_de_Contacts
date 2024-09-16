@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "Contacts.h"
 #include <stdbool.h>
 
@@ -28,7 +29,7 @@ int Choix(int *choix){
 void Afficher_un_contact(Contacts *contacts, int i){
 
     printf("\n\t ------ Contacts %d ------\n\n" , i+1);
-    printf("\t -- iD        : %d\n" , contacts[i].id);
+    printf("\t -- iD        : %s\n" , contacts[i].id);
     printf("\t -- Nom       : %s\n" , contacts[i].Nom);
     printf("\t -- Telephone : +212 %d\n" , contacts[i].Tele);
     printf("\t -- Email     : %s\n" , contacts[i].Email);
@@ -46,7 +47,7 @@ void Afficher_tout_les_contact(Contacts *contacts, int *Taille){
 
     for(i=0 ; i < *Taille ; i++){
         printf("\n\t \x1b[32m------ Contacts %d ------\x1b[0m\n\n" , i+1);
-        printf("\t -- iD        : %d\n" , contacts[i].id);
+        printf("\t -- iD        : %s\n" , contacts[i].id);
         printf("\t -- Nom       : %s\n" , contacts[i].Nom);
         printf("\t -- Telephone : +212 %d\n" , contacts[i].Tele);
         printf("\t -- Email     : %s\n" , contacts[i].Email);
@@ -64,32 +65,46 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
     }
 
     Contacts contact;
-
+    
     printf("\n\t \x1b[32m---- Ajouter un contatc ----\x1b[0m \n");
+ 
 
-    // Validation de id -------
-    int id_count = 0; 
+    // generer L'id ----------- 
+    srand(time(NULL));
+
     while(1){
-        printf("\n\t -- iD   : ");
-        int valide_input = scanf("%d" , &contact.id);
-        while(getchar() != '\n');
 
-        if(valide_input){
+        int counter= 0 , i;  
+        char Generate_id[100];
+
+        for(i=0;counter<100;i++){
+            char random = 48 + (rand() % 74);
+            if( (random >= 48 && random <= 57 ) || (random >= 65 && random <= 90 ) || (random >= 97 && random <= 122 )){
+                Generate_id[i] = random; 
+                counter++;      
+                
+            }
+        }
+
+        Generate_id[i] = '\0';
+
+        int exist = 1;
+        for(i=0;i<*Taille;i++){
+            if(strcmp(contact.id,Generate_id) == 0) exist = 0;
+        }
+
+        if(exist && strlen(Generate_id) > 10 ){
+            strncpy(contact.id , Generate_id , 10);
             break;
-        }else if(id_count > 2){
-            return 0;
-        }else{
-            id_count++;
-            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
         }
     }
-
+    
     // Validation de nom -------
     int nom_count = 0 ;
     while(1){
         printf("\n\t -- Nom   : ");
         int valide_input = scanf(" %[^\n]s" , contact.Nom);
-        while(getchar() != '\n');
+        
         int i = 0 , valid_nom = 1;
         while(contact.Nom[i] != '\0'){
             if( (contact.Nom[i] >= 65 && contact.Nom[i] <= 90) || (contact.Nom[i] >= 97 && contact.Nom[i] <= 122)){
@@ -111,9 +126,8 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
         }
     }
 
-
     // Validation de Telephone -------
-    int tel_count = 0; 
+    int tel_count = 0;
     while(1){
         
         printf("\n\t -- Telephone : ");
@@ -132,6 +146,7 @@ int Ajouter_un_contact(Contacts *contacts, int *Taille){
         }else{
             tel_count++;
             printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
+           
         }
     }
 
@@ -211,9 +226,6 @@ int Modifier_un_contact(Contacts *contacts, int *Taille){
     Contacts contact;
 
     printf("\n\t \x1b[32m---- Modifier un contatc ----\x1b[0m\n");
-
-    // Validation de id -------
-    contact.id = contacts[pos].id;
 
     // Validation de nom -------
     int nom_count = 0 ;
