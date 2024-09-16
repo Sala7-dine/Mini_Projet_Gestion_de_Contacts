@@ -57,6 +57,10 @@ int main(){
                     }
                     break;
             case 6:
+                    int valid_tri = Tri_des_contact(conatcts , &Taille);
+                    if(valid_tri){
+                        printf("\n\t \x1b[32m--- Les Contact a ete Tri avec succes ----\x1b[0m\n");
+                    }
                     break;
             case 7:
                     printf("\n\t \x1b[32m----- A bientot -----\x1b[0m \n");
@@ -64,11 +68,6 @@ int main(){
             default:
                 break;
             }
-
         }
-
     }
-
-
-
 }

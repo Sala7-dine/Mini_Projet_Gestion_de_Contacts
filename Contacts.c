@@ -391,3 +391,69 @@ int Rechechr_un_contact(Contacts *contacts, int *Taille){
     return 1;
 }
 
+int Tri_des_contact(Contacts *contacts, int *Taille){
+
+    int choix_count = 0 , choix;
+   
+    while(1){
+        printf("\n\t \x1b[32m----- Trier Les Contacts --------\x1b[0m \n");
+        printf("\t 1 - par Nom.\n"); 
+        printf("\t 2 - par Telephone.\n"); 
+        printf("\t 3 - par Addresse Email.\n"); 
+        printf("\t 0 - Menu Priincipale.\n"); 
+        printf("\t\t => ");
+        int valide_input = scanf("%d" , &choix);
+        while(getchar() != '\n');
+
+        if(valide_input){
+            break;
+        }else if( choix_count > 2 ) {
+            return 0;
+        }else{
+            printf("\n\t \x1b[31m-- Invalid Choix --\x1b[0m \n");
+            choix_count++;
+        }
+    }
+
+    
+   
+    if (choix == 1){
+        Contacts e; 
+        for (int i = 0; i < *Taille; i++) {
+            for (int j = i + 1; j < *Taille; j++){ 
+                if (strcmp(contacts[i].Nom, contacts[j].Nom) > 0) {
+                    e = contacts[i];
+                    contacts[i] = contacts[j];
+                    contacts[j] = e;
+                }
+            }
+        }
+        return 1;
+    } else if (choix == 2) {
+        Contacts e; 
+        for (int i = 0; i < *Taille; i++) {
+            for (int j = i + 1; j < *Taille; j++){ 
+                if (contacts[i].Tele > contacts[j].Tele) {
+                    e = contacts[i];
+                    contacts[i] = contacts[j];
+                    contacts[j] = e;
+                }
+            }
+        }
+        return 1;
+    } else if (choix == 3) {
+         Contacts e; 
+        for (int i = 0; i < *Taille; i++) {
+            for (int j = i + 1; j < *Taille; j++){ 
+                if (strcmp(contacts[i].Email, contacts[j].Email) > 0) {
+                    e = contacts[i];
+                    contacts[i] = contacts[j];
+                    contacts[j] = e;
+                }
+            }
+        }
+        return 1;
+    } else{
+        return 0;
+    }
+}
